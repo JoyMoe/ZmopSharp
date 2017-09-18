@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Web;
-using System.Text;
-using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using System.Text;
 using Zmop.Api.Parser;
 using Zmop.Api.Request;
 using Zmop.Api.Util;
@@ -147,7 +146,7 @@ namespace Zmop.Api
         public string generateSignWithUrlEncode<T>(IZmopRequest<T> request) where T : ZmopResponse
         {
             String sign = generateSign(request);
-            return HttpUtility.UrlEncode(sign, Encoding.GetEncoding(charset));
+            return WebUtility.UrlEncode(sign);
         }
 
 
@@ -173,7 +172,7 @@ namespace Zmop.Api
         public string generateEncryptedParamWithUrlEncode<T>(IZmopRequest<T> request) where T : ZmopResponse
         {
             String encryptedParam = generateEncryptedParam(request);
-            return HttpUtility.UrlEncode(encryptedParam, Encoding.GetEncoding(charset));
+            return WebUtility.UrlEncode(encryptedParam);
         }
 
         private string getBizParamStr<T>(IZmopRequest<T> request) where T : ZmopResponse

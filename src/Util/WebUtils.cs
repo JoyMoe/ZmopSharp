@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Web;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Zmop.Api.Util
 {
@@ -220,7 +218,7 @@ namespace Zmop.Api.Util
 
                     if(encode)
                     {
-                        value = HttpUtility.UrlEncode(value, Encoding.GetEncoding(charset));
+                        value = WebUtility.UrlEncode(value);
                     }
 
                     postData.Append(value);
