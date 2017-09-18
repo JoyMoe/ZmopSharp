@@ -1,6 +1,13 @@
 ZmopSharp: 芝麻信用开放平台 SDK
 ===
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/JoyMoe/ZmopSharp/master/LICENSE)
+[![NuGet](https://img.shields.io/nuget/dt/ZmopSharp.svg)](https://www.nuget.org/packages/ZmopSharp)
+![net451](https://img.shields.io/badge/.Net-4.5.1-brightgreen.svg)
+![net462](https://img.shields.io/badge/.Net-4.6.2-brightgreen.svg)
+![netstandard1.3](https://img.shields.io/badge/.Net-netstandard1.3-red.svg)
+![netstandard2.0](https://img.shields.io/badge/.Net-netstandard2.0-red.svg)
+
 ### 安装
 使用 Package Manager Console 或 Nuget.
 ```powershell
