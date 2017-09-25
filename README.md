@@ -16,6 +16,7 @@ PM> Install-Package ZmopSharp.Core
 ## 待办
 
 * [x] 核心实现（请求、响应、加密解密）
+* [x] 芝麻授权
 * [ ] 芝麻认证
 * [ ] 芝麻评分
 * [ ] 行业关注

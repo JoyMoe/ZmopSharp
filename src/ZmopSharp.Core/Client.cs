@@ -33,7 +33,7 @@ namespace ZmopSharp.Core
         {
             request = PrepareRequest(request);
 
-            return $"{Endpoint}?{ObjectToQueryString(request)}";
+            return $"{Endpoint}?{request.ToHttpContent().ReadAsStringAsync().Result}";
         }
 
         public async Task<JObject> SendAsync(Request request)

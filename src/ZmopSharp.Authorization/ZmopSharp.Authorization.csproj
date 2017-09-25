@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>ZMOP Authorization SDK for .NET
+芝麻授权 SDK</Description>
+    <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <Version>0.1.0</Version>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageTags>zmop;芝麻信用;芝麻授权</PackageTags>
+    <PackOnBuild>true</PackOnBuild>
+    <Authors>Chino Chang &lt;chino@joymoe.com&gt;</Authors>
+    <PackageId>ZmopSharp.Authorization</PackageId>
+    <PackageVersion>0.1.0</PackageVersion>
+    <PackageProjectUrl>https://github.com/JoyMoe/ZmopSharp</PackageProjectUrl>
+    <Title>ZmopSharp.Authorization</Title>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZmopSharp.Core\ZmopSharp.Core.csproj" />
+  </ItemGroup>
+</Project>
