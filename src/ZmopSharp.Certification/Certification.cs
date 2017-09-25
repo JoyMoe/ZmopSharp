@@ -61,15 +61,9 @@ namespace ZmopSharp
             });
         }
 
-        public object ParseResponse(string response, string signature)
+        public JObject ParseResponse(string response, string signature)
         {
-            var result = _client.ParseResponse(response, signature);
-
-            return new
-            {
-                passed = result.Value<bool>("passed"),
-                failed_reason = result.Value<string>("failed_reason"),
-            };
+            return _client.ParseResponse(response, signature);
         }
     }
 }
