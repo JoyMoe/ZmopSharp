@@ -37,13 +37,13 @@ namespace ZmopSharp
                     ext_biz_param = "{}",
                 },
             });
-            
+
             return _client.GetRedirectUri(new Request
             {
                 Method = CertificationMethod,
                 Params = new
                 {
-                    biz_no = result["biz_no"],
+                    biz_no = result["biz_response"]["biz_no"],
                     return_url = returnUrl,
                 }
             });
