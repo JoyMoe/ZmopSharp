@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json.Linq;
 using ZmopSharp.Core;
 using AuthorizationConstants = ZmopSharp.Constants.Authorization;
 
@@ -59,7 +60,7 @@ namespace ZmopSharp
 
         public string GetOpenId(string response, string signature, string state = "")
         {
-            var result = _client.ParseResponse(response, signature);
+            var result = JObject.Parse(_client.ParseResponse(response, signature));
 
             if (result["state"].ToString() != state)
             {

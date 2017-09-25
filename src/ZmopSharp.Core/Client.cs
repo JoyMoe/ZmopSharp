@@ -52,7 +52,7 @@ namespace ZmopSharp.Core
                     var response = jObject.GetValue("biz_response").Value<string>();
                     var signature = jObject.GetValue("biz_response_sign").Value<string>();
 
-                    jObject["biz_response"] = ParseResponse(response, signature);
+                    jObject["biz_response"] = JObject.Parse(ParseResponse(response, signature));
                     jObject["encrypted"] = false;
                 }
 
@@ -60,7 +60,7 @@ namespace ZmopSharp.Core
             }
         }
 
-        public JObject ParseResponse(string response, string signature)
+        public string ParseResponse(string response, string signature)
         {
             var plainText = Encryption.Decrypt(_appKey, response);
 
@@ -69,7 +69,7 @@ namespace ZmopSharp.Core
                 throw new Exception("Signature mismatch.");
             }
 
-            return JObject.Parse(plainText);
+            return plainText;
         }
 
         private Request PrepareRequest(Request request)
