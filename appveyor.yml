@@ -30,6 +30,8 @@ deploy:
   - provider: NuGet
     api_key:
       secure: kjA63+LHc51urduHzRRUta7ysBfjHoaMw0OR+SzDolWpo5DQqKhTTwHFBh8AuSND
+    on:
+      branch: master
   - provider: GitHub
     description: AppVeyor CI deployment
     auth_token:
