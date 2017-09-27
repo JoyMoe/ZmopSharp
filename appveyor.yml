@@ -1,4 +1,6 @@
 version: 0.1.{build}
+init:
+  - if %APPVEYOR_REPO_TAG%==false (appveyor UpdateBuild -Version "$version+$commitId") 
 skip_branch_with_pr: true
 image: Visual Studio 2017
 dotnet_csproj:
