@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZmopSharp.Authorization", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZmopSharp.Certification", "src\ZmopSharp.Certification\ZmopSharp.Certification.csproj", "{BAFA99C9-C9C0-433D-96EE-731BC7CC2C18}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4EBF4CBA-0D05-44F0-A1A5-4475C41881C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZmopSharp.Core.Test", "test\ZmopSharp.Core.Test\ZmopSharp.Core.Test.csproj", "{C7060110-872B-4DF7-A3E6-70C05D1781D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,10 +31,15 @@ Global
 		{BAFA99C9-C9C0-433D-96EE-731BC7CC2C18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAFA99C9-C9C0-433D-96EE-731BC7CC2C18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAFA99C9-C9C0-433D-96EE-731BC7CC2C18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7060110-872B-4DF7-A3E6-70C05D1781D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7060110-872B-4DF7-A3E6-70C05D1781D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7060110-872B-4DF7-A3E6-70C05D1781D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7060110-872B-4DF7-A3E6-70C05D1781D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F60BB0EB-9A97-474C-BA22-72D8F2B02CC7} = {BB9128AB-B05A-46A1-B650-99AC14BCA789}
 		{8E226484-3F4E-4FA0-B01D-7CF8921FF51E} = {BB9128AB-B05A-46A1-B650-99AC14BCA789}
 		{BAFA99C9-C9C0-433D-96EE-731BC7CC2C18} = {BB9128AB-B05A-46A1-B650-99AC14BCA789}
+		{C7060110-872B-4DF7-A3E6-70C05D1781D2} = {4EBF4CBA-0D05-44F0-A1A5-4475C41881C0}
 	EndGlobalSection
 EndGlobal

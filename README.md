@@ -3,6 +3,7 @@ ZmopSharp: 芝麻信用开放平台 SDK
 
 [![AppVeyor](https://img.shields.io/appveyor/ci/7IN0SAN9/zmopsharp.svg)](https://ci.appveyor.com/project/7IN0SAN9/zmopsharp)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/JoyMoe/ZmopSharp/master/LICENSE)
+![net451](https://img.shields.io/badge/.Net-4.5.1-brightgreen.svg)
 ![net462](https://img.shields.io/badge/.Net-4.6.2-brightgreen.svg)
 ![netstandard2.0](https://img.shields.io/badge/.Net-netstandard2.0-brightgreen.svg)
 
