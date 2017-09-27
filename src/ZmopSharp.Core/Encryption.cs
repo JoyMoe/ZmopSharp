@@ -11,18 +11,41 @@ namespace ZmopSharp.Core
         public static string Encrypt(string zmopCert, string data)
         {
             var rsa = CreateFromPublicKey(zmopCert);
-#if NET451
-            var cipherBytes = rsa.Encrypt(Encoding.UTF8.GetBytes(data), false);
+#if NET451 || NET462
+            var plainBytes = Encoding.UTF8.GetBytes(data);
+            var maxBlockSize = rsa.KeySize / 8 - 11;
+            if (plainBytes.Length <= maxBlockSize)
+            {
+                return Convert.ToBase64String(rsa.Encrypt(plainBytes, false));
+            }
+            using (var plainStream = new MemoryStream(plainBytes))
+            using (var cipherStream = new MemoryStream())
+            {
+                var buffer = new byte[maxBlockSize];
+                var blockSize = plainStream.Read(buffer, 0, maxBlockSize);
+ 
+                while (blockSize > 0)
+                {
+                    var toEncrypt = new byte[blockSize];
+                    Array.Copy(buffer, 0, toEncrypt, 0, blockSize);
+ 
+                    var cryptograph = rsa.Encrypt(toEncrypt, false);
+                    cipherStream.Write(cryptograph, 0, cryptograph.Length);
+ 
+                    blockSize = plainStream.Read(buffer, 0, maxBlockSize);
+                }
+ 
+                return Convert.ToBase64String(cipherStream.ToArray(), Base64FormattingOptions.None);
+            }
 #else
-            var cipherBytes = rsa.Encrypt(Encoding.UTF8.GetBytes(data), RSAEncryptionPadding.Pkcs1);
+            return Convert.ToBase64String(rsa.Encrypt(Encoding.UTF8.GetBytes(data), RSAEncryptionPadding.Pkcs1));
 #endif
-            return Convert.ToBase64String(cipherBytes);
         }
 
         public static string Sign(string appKey, string data)
         {
             var rsa = CreateFromPrivateKey(appKey);
-#if NET451
+#if NET451 || NET462
             var signatureBytes = rsa.SignData(Encoding.UTF8.GetBytes(data), new SHA1CryptoServiceProvider());
 #else
             var signatureBytes = rsa.SignData(Encoding.UTF8.GetBytes(data), HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
@@ -33,8 +56,32 @@ namespace ZmopSharp.Core
         public static string Decrypt(string appKey, string data)
         {
             var rsa = CreateFromPrivateKey(appKey);
-#if NET451
-            return Encoding.UTF8.GetString(rsa.Decrypt(Convert.FromBase64String(data), false));
+#if NET451 || NET462
+            var cipherBytes = Convert.FromBase64String(data);
+            var maxBlockSize = rsa.KeySize / 8;
+            if (cipherBytes.Length <= maxBlockSize)
+            {
+                return Encoding.UTF8.GetString(rsa.Decrypt(cipherBytes, false));
+            }
+            using (var cipherStream = new MemoryStream(cipherBytes))
+            using (var plainStream = new MemoryStream())
+            {
+                var buffer = new byte[maxBlockSize];
+                var blockSize = cipherStream.Read(buffer, 0, maxBlockSize);
+ 
+                while (blockSize > 0)
+                {
+                    var toDecrypt = new byte[blockSize];
+                    Array.Copy(buffer, 0, toDecrypt, 0, blockSize);
+ 
+                    var plaintext = rsa.Decrypt(toDecrypt, false);
+                    plainStream.Write(plaintext, 0, plaintext.Length);
+ 
+                    blockSize = cipherStream.Read(buffer, 0, maxBlockSize);
+                }
+ 
+                return Encoding.UTF8.GetString(plainStream.ToArray());
+            }
 #else
             return Encoding.UTF8.GetString(rsa.Decrypt(Convert.FromBase64String(data), RSAEncryptionPadding.Pkcs1));
 #endif
@@ -43,14 +90,14 @@ namespace ZmopSharp.Core
         public static bool Verify(string zmopCert, string data, string signature)
         {
             var rsa = CreateFromPublicKey(zmopCert);
-#if NET451
+#if NET451 || NET462
             return rsa.VerifyData(Encoding.UTF8.GetBytes(data), new SHA1CryptoServiceProvider(), Convert.FromBase64String(signature));
 #else
             return rsa.VerifyData(Encoding.UTF8.GetBytes(data), Convert.FromBase64String(signature), HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
 #endif
         }
 
-#if NET451
+#if NET451 || NET462
         private static RSACryptoServiceProvider CreateFromPrivateKey(string privateKey)
 #else
         private static RSA CreateFromPrivateKey(string privateKey)
@@ -58,7 +105,7 @@ namespace ZmopSharp.Core
         {
             var privateKeyBits = Convert.FromBase64String(privateKey);
 
-#if NET451
+#if NET451 || NET462
             var rsa = new RSACryptoServiceProvider();
 #else
             var rsa = RSA.Create();
@@ -68,9 +115,7 @@ namespace ZmopSharp.Core
 
             using (var binr = new BinaryReader(new MemoryStream(privateKeyBits)))
             {
-                byte bt;
-                ushort twobytes;
-                twobytes = binr.ReadUInt16();
+                var twobytes = binr.ReadUInt16();
                 switch (twobytes)
                 {
                     case 0x8130:
@@ -87,7 +132,7 @@ namespace ZmopSharp.Core
                 if (twobytes != 0x0102)
                     throw new Exception("Unexpected version");
 
-                bt = binr.ReadByte();
+                var bt = binr.ReadByte();
                 if (bt != 0x00)
                     throw new Exception("Unexpected value read binr.ReadByte()");
 
@@ -107,9 +152,8 @@ namespace ZmopSharp.Core
 
         private static int GetIntegerSize(BinaryReader binr)
         {
-            byte bt;
             int count;
-            bt = binr.ReadByte();
+            var bt = binr.ReadByte();
             if (bt != 0x02)
                 return 0;
             bt = binr.ReadByte();
@@ -138,14 +182,13 @@ namespace ZmopSharp.Core
             return count;
         }
 
-#if NET451
+#if NET451 || NET462
         private static RSACryptoServiceProvider CreateFromPublicKey(string publicKeyString)
 #else
         private static RSA CreateFromPublicKey(string publicKeyString)
 #endif
         {
             byte[] seqOid = { 0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01, 0x05, 0x00 };
-            byte[] seq;
 
             var x509Key = Convert.FromBase64String(publicKeyString);
 
@@ -153,10 +196,7 @@ namespace ZmopSharp.Core
             {
                 using (var binr = new BinaryReader(mem))
                 {
-                    byte bt;
-                    ushort twobytes;
-
-                    twobytes = binr.ReadUInt16();
+                    var twobytes = binr.ReadUInt16();
                     switch (twobytes)
                     {
                         case 0x8130:
@@ -169,7 +209,7 @@ namespace ZmopSharp.Core
                             return null;
                     }
 
-                    seq = binr.ReadBytes(15);
+                    var seq = binr.ReadBytes(15);
                     if (!CompareBytearrays(seq, seqOid))
                         return null;
 
@@ -186,7 +226,7 @@ namespace ZmopSharp.Core
                             return null;
                     }
 
-                    bt = binr.ReadByte();
+                    var bt = binr.ReadByte();
                     if (bt != 0x00)
                         return null;
 
@@ -236,7 +276,7 @@ namespace ZmopSharp.Core
                     var expbytes = (int)binr.ReadByte();
                     var exponent = binr.ReadBytes(expbytes);
 
-#if NET451
+#if NET451 || NET462
                     var rsa = new RSACryptoServiceProvider();
 #else
                     var rsa = RSA.Create();
