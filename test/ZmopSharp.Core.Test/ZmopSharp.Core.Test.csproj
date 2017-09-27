@@ -1,17 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net451;net462;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>net451;net462;netcoreapp1.0;netcoreapp2.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="xunit" Version="2.2.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
-  </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net462' or '$(TargetFramework)' == 'net451'">
     <Reference Include="System.Net.Http" />
+    <PackageReference Include="xunit" Version="2.1.0" />
+    <PackageReference Include="xunit.abstractions" Version="2.0.0" />
+    <PackageReference Include="xunit.assert" Version="2.1.0" />
+    <PackageReference Include="xunit.core" Version="2.1.0" />
+    <PackageReference Include="xunit.extensibility.core" Version="2.1.0" />
+    <PackageReference Include="xunit.extensibility.execution" Version="2.1.0" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0' or '$(TargetFramework)' == 'netcoreapp1.0'">
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0-preview-20170628-02" />
+    <PackageReference Include="xunit" Version="2.2.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\ZmopSharp.Core\ZmopSharp.Core.csproj" />
