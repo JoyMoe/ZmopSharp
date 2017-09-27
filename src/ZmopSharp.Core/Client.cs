@@ -2,6 +2,9 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+#if NETSTANDARD1_3
+using System.Reflection;
+#endif
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
