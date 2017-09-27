@@ -9,5 +9,7 @@ os:
   - osx
 osx_image: xcode8.2
 solution: ZmopSharp.sln
+install:
+  - nuget restore ZmopSharp.sln
 script:
   - msbuild /p:Configuration=Release
