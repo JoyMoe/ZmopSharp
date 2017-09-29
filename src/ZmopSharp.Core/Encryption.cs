@@ -44,7 +44,7 @@ namespace ZmopSharp.Core
                     blockSize = plainStream.Read(buffer, 0, maxBlockSize);
                 }
  
-                return Convert.ToBase64String(cipherStream.ToArray(), Base64FormattingOptions.None);
+                return Convert.ToBase64String(cipherStream.ToArray());
             }
         }
 
