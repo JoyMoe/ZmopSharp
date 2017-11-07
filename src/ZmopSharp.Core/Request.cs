@@ -22,7 +22,7 @@ namespace ZmopSharp.Core
                 new KeyValuePair<string, string>("version", Version),
                 new KeyValuePair<string, string>("platform", Platform),
                 new KeyValuePair<string, string>("params", Params as string),
-                new KeyValuePair<string, string>("sign", Sign),
+                new KeyValuePair<string, string>("sign", Sign)
             });
         }
     }

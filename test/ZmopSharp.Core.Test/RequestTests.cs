@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using Xunit;
 
@@ -14,9 +14,9 @@ namespace ZmopSharp.Core.Test
                 AppId = "000000000",
                 Method = "zhima.customer.certification.initialize",
                 Params = "parameters",
-                Sign = "signature",
+                Sign = "signature"
             };
-            
+
             Assert.IsType<FormUrlEncodedContent>(request.ToHttpContent());
         }
     }
