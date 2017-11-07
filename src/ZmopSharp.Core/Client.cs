@@ -50,14 +50,13 @@ namespace ZmopSharp.Core
 
                 var jObject = JObject.Parse(result);
 
-                if (jObject.GetValue("encrypted").Value<bool>())
-                {
-                    var response = jObject.GetValue("biz_response").Value<string>();
-                    var signature = jObject.GetValue("biz_response_sign").Value<string>();
+                if (!jObject.GetValue("encrypted").Value<bool>()) return jObject;
 
-                    jObject["biz_response"] = JObject.Parse(ParseResponse(response, signature));
-                    jObject["encrypted"] = false;
-                }
+                var response = jObject.GetValue("biz_response").Value<string>();
+                var signature = jObject.GetValue("biz_response_sign").Value<string>();
+
+                jObject["biz_response"] = JObject.Parse(ParseResponse(response, signature));
+                jObject["encrypted"] = false;
 
                 return jObject;
             }

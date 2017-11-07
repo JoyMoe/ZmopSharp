@@ -51,7 +51,7 @@ namespace ZmopSharp
                 {
                     identity_type = identityType,
                     identity_param = identityParam,
-                    biz_params = bizParams,
+                    biz_params = bizParams
                 }
             };
 

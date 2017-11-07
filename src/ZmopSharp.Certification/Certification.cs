@@ -34,8 +34,8 @@ namespace ZmopSharp
                     biz_code = bizCode,
                     identity_param = identityParam,
                     merchant_config = merchantConfig,
-                    ext_biz_param = "{}",
-                },
+                    ext_biz_param = "{}"
+                }
             });
 
             return _client.GetRedirectUri(new Request
@@ -44,7 +44,7 @@ namespace ZmopSharp
                 Params = new
                 {
                     biz_no = result["biz_response"]["biz_no"],
-                    return_url = returnUrl,
+                    return_url = returnUrl
                 }
             });
         }
@@ -56,8 +56,8 @@ namespace ZmopSharp
                 Method = QueryMethod,
                 Params = new
                 {
-                    biz_no = bizNo,
-                },
+                    biz_no = bizNo
+                }
             });
         }
 
