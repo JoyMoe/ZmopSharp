@@ -96,7 +96,7 @@ namespace ZmopSharp.Core
                 throw new ArgumentNullException(nameof(request.Params));
             }
 
-            var queryString = ObjectToQueryString(request.Params);
+            var queryString = request.Params is string s ? s : ObjectToQueryString(request.Params);
 
             request.Params = Encryption.Encrypt(_zmopCert, queryString);
             request.Sign = Encryption.Sign(_appKey, queryString);
