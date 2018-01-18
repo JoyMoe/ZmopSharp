@@ -15,12 +15,12 @@ namespace ZmopSharp.Core.Test
                 AppKey = Constants.Encryption.PrivateKey,
                 ZmopCert = Constants.Encryption.PublicKey
             };
-            
+
             Assert.IsType<Client>(client);
-            
-            Assert.Equal(client.AppId, "000000000");
+
+            Assert.Equal("000000000", client.AppId);
         }
-        
+
         [Fact]
         public void Client_Can_Get_Redirect_Uri()
         {
@@ -43,7 +43,7 @@ namespace ZmopSharp.Core.Test
             Assert.Contains("app_id=000000000", client.GetRedirectUri(request));
             Assert.Contains("method=zhima.customer.certification.initialize", client.GetRedirectUri(request));
         }
-        
+
         [Fact]
         public async Task Client_Can_Send_Request()
         {
@@ -63,7 +63,7 @@ namespace ZmopSharp.Core.Test
             };
 
             var result = await client.SendAsync(request);
-            
+
             Assert.IsType<JObject>(result);
             Assert.Contains("ZMOP.invalid_appid_param", result.GetValue("biz_response").Value<string>());
         }

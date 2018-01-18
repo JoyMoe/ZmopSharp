@@ -1,6 +1,6 @@
 version: 0.1.{build}
 init:
-  - if %APPVEYOR_REPO_TAG%==false (appveyor UpdateBuild -Version "%APPVEYOR_BUILD_VERSION%-build%APPVEYOR_BUILD_NUMBER%") 
+  - if %APPVEYOR_REPO_TAG%==false (appveyor UpdateBuild -Version "%APPVEYOR_BUILD_VERSION%-build%APPVEYOR_BUILD_NUMBER%")
 skip_branch_with_pr: true
 image: Visual Studio 2017
 dotnet_csproj:
@@ -32,6 +32,11 @@ deploy:
       secure: kjA63+LHc51urduHzRRUta7ysBfjHoaMw0OR+SzDolWpo5DQqKhTTwHFBh8AuSND
     on:
       branch: master
+  - provider: NuGet
+    api_key:
+      secure: kjA63+LHc51urduHzRRUta7ysBfjHoaMw0OR+SzDolWpo5DQqKhTTwHFBh8AuSND
+    on:
+      appveyor_repo_tag: true
   - provider: GitHub
     description: AppVeyor CI deployment
     auth_token:

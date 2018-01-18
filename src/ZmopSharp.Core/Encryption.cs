@@ -16,7 +16,7 @@ namespace ZmopSharp.Core
             var maxBlockSize = rsa.KeySize / 8 - 11;
             if (plainBytes.Length <= maxBlockSize)
             {
-#if NET451
+#if NET452
                 return Convert.ToBase64String(rsa.Encrypt(plainBytes, false));
 #else
                 return Convert.ToBase64String(rsa.Encrypt(Encoding.UTF8.GetBytes(data), RSAEncryptionPadding.Pkcs1));
@@ -27,13 +27,13 @@ namespace ZmopSharp.Core
             {
                 var buffer = new byte[maxBlockSize];
                 var blockSize = plainStream.Read(buffer, 0, maxBlockSize);
- 
+
                 while (blockSize > 0)
                 {
                     var toEncrypt = new byte[blockSize];
                     Array.Copy(buffer, 0, toEncrypt, 0, blockSize);
 
-#if NET451
+#if NET452
                     var cryptograph = rsa.Encrypt(toEncrypt, false);
 #else
                     var cryptograph = rsa.Encrypt(toEncrypt, RSAEncryptionPadding.Pkcs1);
@@ -43,7 +43,7 @@ namespace ZmopSharp.Core
 
                     blockSize = plainStream.Read(buffer, 0, maxBlockSize);
                 }
- 
+
                 return Convert.ToBase64String(cipherStream.ToArray());
             }
         }
@@ -51,7 +51,7 @@ namespace ZmopSharp.Core
         public static string Sign(string appKey, string data)
         {
             var rsa = CreateFromPrivateKey(appKey);
-#if NET451
+#if NET452
             var signatureBytes = rsa.SignData(Encoding.UTF8.GetBytes(data), new SHA1CryptoServiceProvider());
 #else
             var signatureBytes = rsa.SignData(Encoding.UTF8.GetBytes(data), HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
@@ -67,7 +67,7 @@ namespace ZmopSharp.Core
             var maxBlockSize = rsa.KeySize / 8;
             if (cipherBytes.Length <= maxBlockSize)
             {
-#if NET451
+#if NET452
                 return Encoding.UTF8.GetString(rsa.Decrypt(cipherBytes, false));
 #else
                 return Encoding.UTF8.GetString(rsa.Decrypt(Convert.FromBase64String(data), RSAEncryptionPadding.Pkcs1));
@@ -78,23 +78,23 @@ namespace ZmopSharp.Core
             {
                 var buffer = new byte[maxBlockSize];
                 var blockSize = cipherStream.Read(buffer, 0, maxBlockSize);
- 
+
                 while (blockSize > 0)
                 {
                     var toDecrypt = new byte[blockSize];
                     Array.Copy(buffer, 0, toDecrypt, 0, blockSize);
 
-#if NET451
+#if NET452
                     var plaintext = rsa.Decrypt(toDecrypt, false);
 #else
                     var plaintext = rsa.Decrypt(Convert.FromBase64String(data), RSAEncryptionPadding.Pkcs1);
 #endif
 
                     plainStream.Write(plaintext, 0, plaintext.Length);
- 
+
                     blockSize = cipherStream.Read(buffer, 0, maxBlockSize);
                 }
- 
+
                 return Encoding.UTF8.GetString(plainStream.ToArray());
             }
         }
@@ -102,14 +102,14 @@ namespace ZmopSharp.Core
         public static bool Verify(string zmopCert, string data, string signature)
         {
             var rsa = CreateFromPublicKey(zmopCert);
-#if NET451
+#if NET452
             return rsa.VerifyData(Encoding.UTF8.GetBytes(data), new SHA1CryptoServiceProvider(), Convert.FromBase64String(signature));
 #else
             return rsa.VerifyData(Encoding.UTF8.GetBytes(data), Convert.FromBase64String(signature), HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
 #endif
         }
 
-#if NET451
+#if NET452
         private static RSACryptoServiceProvider CreateFromPrivateKey(string privateKey)
 #else
         private static RSA CreateFromPrivateKey(string privateKey)
@@ -117,7 +117,7 @@ namespace ZmopSharp.Core
         {
             var privateKeyBits = Convert.FromBase64String(privateKey);
 
-#if NET451
+#if NET452
             var rsa = new RSACryptoServiceProvider();
 #else
             var rsa = RSA.Create();
@@ -194,7 +194,7 @@ namespace ZmopSharp.Core
             return count;
         }
 
-#if NET451
+#if NET452
         private static RSACryptoServiceProvider CreateFromPublicKey(string publicKeyString)
 #else
         private static RSA CreateFromPublicKey(string publicKeyString)
@@ -288,7 +288,7 @@ namespace ZmopSharp.Core
                     var expbytes = (int)binr.ReadByte();
                     var exponent = binr.ReadBytes(expbytes);
 
-#if NET451
+#if NET452
                     var rsa = new RSACryptoServiceProvider();
 #else
                     var rsa = RSA.Create();

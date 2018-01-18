@@ -1,29 +1,25 @@
 language: csharp
-sudo: required
-dist: trusty
-env:  
-  - CLI_VERSION=latest
-addons:  
-  apt:
-    packages:
-    - gettext
-    - libcurl4-openssl-dev
-    - libicu-dev
-    - libssl-dev
-    - libunwind8
-    - zlib1g
-mono: 5.2.0
-os:
-  - linux
-  - osx
-osx_image: xcode9
-before_install:  
-  - if test "$TRAVIS_OS_NAME" == "osx"; then brew update; brew install openssl; ln -s /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib /usr/local/lib/; ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/; fi
+solution: ZmopSharp.sln
+
+matrix:
+  include:
+    - dotnet: 1.1.7
+      mono: none
+      env: DOTNETCORE=1
+    - dotnet: 2.1.4
+      mono: none
+      env: DOTNETCORE=2
+    - mono: latest
+      env: DOTNETCORE=0
+
 install:
-  - export DOTNET_INSTALL_DIR="$PWD/.dotnetcli"
-  - curl -sSL https://raw.githubusercontent.com/dotnet/cli/release/2.0.0/scripts/obtain/dotnet-install.sh | bash /dev/stdin --version "$CLI_VERSION" --install-dir "$DOTNET_INSTALL_DIR"
-  - export PATH="$DOTNET_INSTALL_DIR:$PATH"  
-before_script:
-  - dotnet restore
+  - if [ "$DOTNETCORE" = "0" ]; then nuget restore; else dotnet restore --runtime current; fi
+  - if [ "$DOTNETCORE" = "0" ]; then nuget install xunit.runner.console -Version 2.1.0 -OutputDirectory testrunner; fi
+
 script:
-  - dotnet test ./test/*/*.csproj -c Release -f netcoreapp2.0
+  - if [ "$DOTNETCORE" = "1" ]; then dotnet test test/ZmopSharp.Core.Test/ZmopSharp.Core.Test.csproj -c Release -f netcoreapp1.0; fi
+  - if [ "$DOTNETCORE" = "2" ]; then dotnet test test/ZmopSharp.Core.Test/ZmopSharp.Core.Test.csproj -c Release -f netcoreapp2.0; fi
+  - if [ "$DOTNETCORE" = "0" ]; then msbuild /p:Configuration=Release /p:TargetFramework=net452; fi
+  - if [ "$DOTNETCORE" = "0" ]; then mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./test/ZmopSharp.Core.Test/bin/Release/net452/ZmopSharp.Core.Test.dll; fi
+  - if [ "$DOTNETCORE" = "0" ]; then msbuild /p:Configuration=Release /p:TargetFramework=net462; fi
+  - if [ "$DOTNETCORE" = "0" ]; then mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./test/ZmopSharp.Core.Test/bin/Release/net462/ZmopSharp.Core.Test.dll; fi
