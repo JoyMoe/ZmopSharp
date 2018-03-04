@@ -9,7 +9,7 @@ namespace ZmopSharp.Score
 {
     public class Score
     {
-        private const string BriefGetMethod= "zhima.credit.score.brief.get";
+        private const string GetBriefMethod= "zhima.credit.score.brief.get";
         private const string GetMethod = "zhima.credit.score.get";
         private readonly Client _client;
 
@@ -55,7 +55,7 @@ namespace ZmopSharp.Score
 
             var result = await _client.SendAsync(new Request
             {
-                Method = BriefGetMethod,
+                Method = GetBriefMethod,
                 Params = new
                 {
                     transaction_id = transactionId,

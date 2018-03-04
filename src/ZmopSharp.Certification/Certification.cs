@@ -8,8 +8,8 @@ namespace ZmopSharp
 {
     public class Certification
     {
-        private const string InitializationMethod = "zhima.customer.certification.initialize";
-        private const string CertificationMethod = "zhima.customer.certification.certify";
+        private const string InitializeMethod = "zhima.customer.certification.initialize";
+        private const string CertifyMethod = "zhima.customer.certification.certify";
         private const string QueryMethod = "zhima.customer.certification.query";
         private readonly Client _client;
 
@@ -27,7 +27,7 @@ namespace ZmopSharp
         {
             var result = await _client.SendAsync(new Request
             {
-                Method = InitializationMethod,
+                Method = InitializeMethod,
                 Params = new
                 {
                     transaction_id = transactionId,
@@ -46,7 +46,7 @@ namespace ZmopSharp
 
             return _client.GetRedirectUri(new Request
             {
-                Method = CertificationMethod,
+                Method = CertifyMethod,
                 Params = new
                 {
                     biz_no = result["biz_response"]["biz_no"].Value<string>(),

@@ -9,7 +9,7 @@ namespace ZmopSharp
 {
     public class Authorization
     {
-        private const string AuthorizationMethod = "zhima.auth.info.authorize";
+        private const string AuthorizeMethod = "zhima.auth.info.authorize";
         private const string QueryMethod = "zhima.auth.info.authquery";
         private readonly Client _client;
 
@@ -49,7 +49,7 @@ namespace ZmopSharp
 
             var request = new Request
             {
-                Method = AuthorizationMethod,
+                Method = AuthorizeMethod,
                 Params = new
                 {
                     identity_type = identityType,
