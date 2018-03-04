@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using ZmopSharp.Core;
 using ScoreConstants = ZmopSharp.Constants.Score;
@@ -7,6 +8,7 @@ namespace ZmopSharp.Score
 {
     public class Score
     {
+        private const string BriefGetMethod= "zhima.credit.score.brief.get";
         private const string GetMethod = "zhima.credit.score.get";
         private readonly Client _client;
 
@@ -39,6 +41,37 @@ namespace ZmopSharp.Score
             }
 
             return string.Equals("N/A", result["biz_response"]["zmScore"].Value<string>()) ? 0 : result["biz_response"]["zmScore"].Value<int>();
+        }
+        
+        public async Task<bool> GetAsync(string transactionId, string certType, string certNo, string name, int admittanceScore)
+        {
+            if (!string.Equals(Constants.Score.CertType.AlipayUserId, certType) &&
+                !string.Equals(Constants.Score.CertType.IdentityCard, certType) &&
+                !string.Equals(Constants.Score.CertType.Passport, certType))
+            {
+                throw new ArgumentOutOfRangeException(nameof(certType));
+            }
+
+            var result = await _client.SendAsync(new Request
+            {
+                Method = BriefGetMethod,
+                Params = new
+                {
+                    transaction_id = transactionId,
+                    product_code = ScoreConstants.ProductCode.ScoreBrief,
+                    cert_type = certType,
+                    cert_no = certNo,
+                    name = name,
+                    admittance_score = admittanceScore
+                }
+            });
+
+            if (!result["biz_response"]["success"].Value<bool>())
+            {
+                throw new ZmopException(result["biz_response"]["errorMessage"].Value<string>());
+            }
+
+            return string.Equals("Y", result["biz_response"]["is_admittance"].Value<string>());
         }
     }
 }
