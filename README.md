@@ -29,30 +29,30 @@ PM> Install-Package ZmopSharp.Score
 ## 功能
 
 * [x] 核心实现（ZmopSharp.Core）
-      * [x] 客户端（Client）
-      * [x] 加密解密（Encryption）
-      * [x] 请求（Request）
-      * [x] 异常（Exception）
+  * [x] 客户端（Client）
+  * [x] 加密解密（Encryption）
+  * [x] 请求（Request）
+  * [x] 异常（Exception）
 * [x] 芝麻授权（ZmopSharp.Authorization）
-      * [x] 页面授权
-      * [x] 授权查询
+  * [x] 页面授权
+  * [x] 授权查询
 * [x] 芝麻认证（ZmopSharp.Certification）
-      * [x] 初始化
-      * [x] 开始认证
-      * [x] 认证查询
+  * [x] 初始化
+  * [x] 开始认证
+  * [x] 认证查询
 * [x] 芝麻评分（ZmopSharp.Score）
-      * [x] 信用评分
-      * [x] 信用评分普惠版
+  * [x] 信用评分
+  * [x] 信用评分普惠版
 * [ ] 数据反馈（ZmopSharp.Feedback）
-      * [ ] 批量反馈
-      * [ ] 反馈模板
+  * [ ] 批量反馈
+  * [ ] 反馈模板
 * [ ] 芝麻IVS（ZmopSharp.Ivs）
-      * [ ] 欺诈评分
-      * [ ] 信息验证
-      * [ ] 关注清单
+  * [ ] 欺诈评分
+  * [ ] 信息验证
+  * [ ] 关注清单
 * [ ] 行业关注（ZmopSharp.Watchlist）
-      * [ ] 关注名单
-      * [ ] 关注名单普惠版
+  * [ ] 关注名单
+  * [ ] 关注名单普惠版
 
 ## 协议
 
