@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using ZmopSharp.Core;
+using ZmopSharp.Exceptions;
 using ScoreConstants = ZmopSharp.Constants.Score;
 
 namespace ZmopSharp.Score

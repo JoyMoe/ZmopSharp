@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using ZmopSharp.Core;
+using ZmopSharp.Exceptions;
 using CertificationConstants = ZmopSharp.Constants.Certification;
 
 namespace ZmopSharp

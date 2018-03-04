@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using ZmopSharp.Core;
+using ZmopSharp.Exceptions;
 using AuthorizationConstants = ZmopSharp.Constants.Authorization;
 
 namespace ZmopSharp
@@ -8,6 +10,7 @@ namespace ZmopSharp
     public class Authorization
     {
         private const string AuthorizationMethod = "zhima.auth.info.authorize";
+        private const string QueryMethod = "zhima.auth.info.authquery";
         private readonly Client _client;
 
         public Authorization(Client client)
@@ -68,6 +71,32 @@ namespace ZmopSharp
             }
 
             return result["open_id"].Value<string>();
+        }
+        
+        public async Task<string> QueryAsync(string identityType, string identityParam, string authCategory)
+        {
+            var result = await _client.SendAsync(new Request
+            {
+                Method = QueryMethod,
+                Params = new
+                {
+                    identity_type = identityType,
+                    identity_param = identityParam,
+                    auth_category = authCategory
+                }
+            });
+
+            if (!result["biz_response"]["success"].Value<bool>())
+            {
+                throw new ZmopException(result["biz_response"]["errorMessage"].Value<string>());
+            }
+
+            if (!result["biz_response"]["authorized"].Value<bool>())
+            {
+                throw new NotAuthorizedException("");
+            }
+
+            return result["biz_response"]["open_id"].Value<string>();
         }
     }
 }

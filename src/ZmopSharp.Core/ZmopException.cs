@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ZmopSharp.Core
+namespace ZmopSharp.Exceptions
 {
     public class ZmopException : Exception
     {
