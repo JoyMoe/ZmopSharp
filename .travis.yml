@@ -9,8 +9,6 @@ matrix:
     - dotnet: 2.1.4
       mono: none
       env: DOTNETCORE=2
-    - mono: latest
-      env: DOTNETCORE=0
 
 install:
   - if [ "$DOTNETCORE" = "0" ]; then nuget restore; else dotnet restore --runtime current; fi
