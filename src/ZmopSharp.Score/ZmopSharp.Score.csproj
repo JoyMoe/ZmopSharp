@@ -6,11 +6,13 @@
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <Version>0.1.0</Version>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <PackageTags>zmop;芝麻信用</PackageTags>
     <PackOnBuild>true</PackOnBuild>
     <Authors>Chino Chang </Authors>
     <PackageId>ZmopSharp.Score</PackageId>
+    <PackageTags>zmop;芝麻信用</PackageTags>
     <PackageVersion>0.1.0</PackageVersion>
+    <PackageIconUrl>https://tvax1.sinaimg.cn/crop.2.2.370.370.180/de750daaly8fh6to8yux0j20af0af0ug.jpg</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/JoyMoe/ZmopSharp/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/JoyMoe/ZmopSharp</PackageProjectUrl>
     <Title>ZmopSharp.Score</Title>
   </PropertyGroup>
