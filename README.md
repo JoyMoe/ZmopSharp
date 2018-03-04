@@ -14,6 +14,7 @@ ZmopSharp: 芝麻信用开放平台 SDK
 | ZmopSharp.Core          | [![NuGet](https://img.shields.io/nuget/v/ZmopSharp.Core.svg)](https://www.nuget.org/packages/ZmopSharp.Core) | [![NuGet](https://img.shields.io/nuget/vpre/ZmopSharp.Core.svg)](https://www.nuget.org/packages/ZmopSharp.Core/absoluteLatest) | [![NuGet](https://img.shields.io/nuget/dt/ZmopSharp.Core.svg)](https://www.nuget.org/packages/ZmopSharp.Core) |
 | ZmopSharp.Authorization | [![NuGet](https://img.shields.io/nuget/v/ZmopSharp.Authorization.svg)](https://www.nuget.org/packages/ZmopSharp.Authorization) | [![NuGet](https://img.shields.io/nuget/vpre/ZmopSharp.Authorization.svg)](https://www.nuget.org/packages/ZmopSharp.Authorization/absoluteLatest) | [![NuGet](https://img.shields.io/nuget/dt/ZmopSharp.Authorization.svg)](https://www.nuget.org/packages/ZmopSharp.Authorization) |
 | ZmopSharp.Certification | [![NuGet](https://img.shields.io/nuget/v/ZmopSharp.Certification.svg)](https://www.nuget.org/packages/ZmopSharp.Certification) | [![NuGet](https://img.shields.io/nuget/vpre/ZmopSharp.Certification.svg)](https://www.nuget.org/packages/ZmopSharp.Certification/absoluteLatest) | [![NuGet](https://img.shields.io/nuget/dt/ZmopSharp.Certification.svg)](https://www.nuget.org/packages/ZmopSharp.Certification) |
+| ZmopSharp.Score         | [![NuGet](https://img.shields.io/nuget/v/ZmopSharp.Score.svg)](https://www.nuget.org/packages/ZmopSharp.Score) | [![NuGet](https://img.shields.io/nuget/vpre/ZmopSharp.Score.svg)](https://www.nuget.org/packages/ZmopSharp.Score/absoluteLatest) | [![NuGet](https://img.shields.io/nuget/dt/ZmopSharp.Score.svg)](https://www.nuget.org/packages/ZmopSharp.Score) |
 
 ### 安装
 
@@ -22,6 +23,7 @@ ZmopSharp: 芝麻信用开放平台 SDK
 PM> Install-Package ZmopSharp.Core
 PM> Install-Package ZmopSharp.Authorization
 PM> Install-Package ZmopSharp.Certification
+PM> Install-Package ZmopSharp.Score
 ```
 
 ## 待办
@@ -29,7 +31,7 @@ PM> Install-Package ZmopSharp.Certification
 * [x] 核心实现（请求、响应、加密解密）
 * [x] 芝麻授权
 * [x] 芝麻认证
-* [ ] 芝麻评分
+* [x] 芝麻评分
 * [ ] 行业关注
 * [ ] 芝麻IVS
 * [ ] 数据反馈

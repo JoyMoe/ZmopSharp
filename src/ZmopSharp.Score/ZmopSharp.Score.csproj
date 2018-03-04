@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>ZMOP Credit Scoring SDK for .NET
+芝麻信用评分 SDK</Description>
+    <TargetFrameworks>net452;net462;netstandard1.3;netstandard2.0</TargetFrameworks>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <Version>0.1.0</Version>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageTags>zmop;芝麻信用</PackageTags>
+    <PackOnBuild>true</PackOnBuild>
+    <Authors>Chino Chang </Authors>
+    <PackageId>ZmopSharp.Score</PackageId>
+    <PackageVersion>0.1.0</PackageVersion>
+    <PackageProjectUrl>https://github.com/JoyMoe/ZmopSharp</PackageProjectUrl>
+    <Title>ZmopSharp.Score</Title>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZmopSharp.Core\ZmopSharp.Core.csproj" />
+  </ItemGroup>
+</Project>
