@@ -62,12 +62,12 @@ namespace ZmopSharp
         {
             var result = JObject.Parse(_client.ParseResponse(response, signature));
 
-            if (result["state"].ToString() != state)
+            if (result["state"].Value<string>() != state)
             {
                 throw new Exception("state token mismatch");
             }
 
-            return result["open_id"].ToString();
+            return result["open_id"].Value<string>();
         }
     }
 }

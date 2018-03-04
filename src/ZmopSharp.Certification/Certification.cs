@@ -38,12 +38,17 @@ namespace ZmopSharp
                 }
             });
 
+            if (!result["biz_response"]["success"].Value<bool>())
+            {
+                throw new ZmopException(result["biz_response"]["errorMessage"].Value<string>());
+            }
+
             return _client.GetRedirectUri(new Request
             {
                 Method = CertificationMethod,
                 Params = new
                 {
-                    biz_no = result["biz_response"]["biz_no"],
+                    biz_no = result["biz_response"]["biz_no"].Value<string>(),
                     return_url = returnUrl
                 }
             });

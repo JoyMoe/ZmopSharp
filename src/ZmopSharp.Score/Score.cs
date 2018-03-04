@@ -20,9 +20,9 @@ namespace ZmopSharp.Score
             _client = new Client(appId, appKey, zmopCert);
         }
 
-        public Task<JObject> GetAsync(string transactionId, string openId)
+        public async Task<int> GetAsync(string transactionId, string openId)
         {
-            return _client.SendAsync(new Request
+            var result = await _client.SendAsync(new Request
             {
                 Method = GetMethod,
                 Params = new
@@ -32,6 +32,13 @@ namespace ZmopSharp.Score
                     open_id = openId
                 }
             });
+            
+            if (!result["biz_response"]["success"].Value<bool>())
+            {
+                throw new ZmopException(result["biz_response"]["errorMessage"].Value<string>());
+            }
+
+            return string.Equals("N/A", result["biz_response"]["zmScore"].Value<string>()) ? 0 : result["biz_response"]["zmScore"].Value<int>();
         }
     }
 }
