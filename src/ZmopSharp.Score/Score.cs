@@ -9,7 +9,7 @@ namespace ZmopSharp.Score
 {
     public class Score
     {
-        private const string GetBriefMethod= "zhima.credit.score.brief.get";
+        private const string CheckMethod= "zhima.credit.score.brief.get";
         private const string GetMethod = "zhima.credit.score.get";
         private readonly Client _client;
 
@@ -43,8 +43,12 @@ namespace ZmopSharp.Score
 
             return string.Equals("N/A", result["biz_response"]["zmScore"].Value<string>()) ? 0 : result["biz_response"]["zmScore"].Value<int>();
         }
-        
+
+        [Obsolete("GetAsync(string, string, string, string, int) is deprecated, please use CheckAsync instead.")]
         public async Task<bool> GetAsync(string transactionId, string certType, string certNo, string name, int admittanceScore)
+            => await CheckAsync(transactionId, certType, certNo, name, admittanceScore);
+
+        public async Task<bool> CheckAsync(string transactionId, string certType, string certNo, string name, int admittanceScore)
         {
             if (!string.Equals(Constants.Score.CertType.AlipayUserId, certType) &&
                 !string.Equals(Constants.Score.CertType.IdentityCard, certType) &&
@@ -55,7 +59,7 @@ namespace ZmopSharp.Score
 
             var result = await _client.SendAsync(new Request
             {
-                Method = GetBriefMethod,
+                Method = CheckMethod,
                 Params = new
                 {
                     transaction_id = transactionId,
