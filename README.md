@@ -13,6 +13,7 @@
 | ZmopSharp.Core          | [![NuGet](https://img.shields.io/nuget/v/ZmopSharp.Core.svg)](https://www.nuget.org/packages/ZmopSharp.Core) | [![NuGet](https://img.shields.io/nuget/vpre/ZmopSharp.Core.svg)](https://www.nuget.org/packages/ZmopSharp.Core/absoluteLatest) | [![NuGet](https://img.shields.io/nuget/dt/ZmopSharp.Core.svg)](https://www.nuget.org/packages/ZmopSharp.Core) |
 | ZmopSharp.Authorization | [![NuGet](https://img.shields.io/nuget/v/ZmopSharp.Authorization.svg)](https://www.nuget.org/packages/ZmopSharp.Authorization) | [![NuGet](https://img.shields.io/nuget/vpre/ZmopSharp.Authorization.svg)](https://www.nuget.org/packages/ZmopSharp.Authorization/absoluteLatest) | [![NuGet](https://img.shields.io/nuget/dt/ZmopSharp.Authorization.svg)](https://www.nuget.org/packages/ZmopSharp.Authorization) |
 | ZmopSharp.Certification | [![NuGet](https://img.shields.io/nuget/v/ZmopSharp.Certification.svg)](https://www.nuget.org/packages/ZmopSharp.Certification) | [![NuGet](https://img.shields.io/nuget/vpre/ZmopSharp.Certification.svg)](https://www.nuget.org/packages/ZmopSharp.Certification/absoluteLatest) | [![NuGet](https://img.shields.io/nuget/dt/ZmopSharp.Certification.svg)](https://www.nuget.org/packages/ZmopSharp.Certification) |
+| ZmopSharp.Ivs           | [![NuGet](https://img.shields.io/nuget/v/ZmopSharp.Ivs.svg)](https://www.nuget.org/packages/ZmopSharp.Ivs) | [![NuGet](https://img.shields.io/nuget/vpre/ZmopSharp.Ivs.svg)](https://www.nuget.org/packages/ZmopSharp.Ivs/absoluteLatest) | [![NuGet](https://img.shields.io/nuget/dt/ZmopSharp.Ivs.svg)](https://www.nuget.org/packages/ZmopSharp.Ivs) |
 | ZmopSharp.Score         | [![NuGet](https://img.shields.io/nuget/v/ZmopSharp.Score.svg)](https://www.nuget.org/packages/ZmopSharp.Score) | [![NuGet](https://img.shields.io/nuget/vpre/ZmopSharp.Score.svg)](https://www.nuget.org/packages/ZmopSharp.Score/absoluteLatest) | [![NuGet](https://img.shields.io/nuget/dt/ZmopSharp.Score.svg)](https://www.nuget.org/packages/ZmopSharp.Score) |
 
 ## 安装
@@ -23,36 +24,37 @@
 PM> Install-Package ZmopSharp.Core
 PM> Install-Package ZmopSharp.Authorization
 PM> Install-Package ZmopSharp.Certification
+PM> Install-Package ZmopSharp.Ivs
 PM> Install-Package ZmopSharp.Score
 ```
 
 ## 功能
 
 * [x] 核心实现（ZmopSharp.Core）
-      * [x] 客户端（Client）
-      * [x] 加密解密（Encryption）
-      * [x] 请求（Request）
-      * [x] 异常（Exception）
+  * [x] 客户端（Client）
+  * [x] 加密解密（Encryption）
+  * [x] 请求（Request）
+  * [x] 异常（Exception）
 * [x] 芝麻授权（ZmopSharp.Authorization）
-      * [x] 页面授权
-      * [x] 授权查询
+  * [x] 页面授权
+  * [x] 授权查询
 * [x] 芝麻认证（ZmopSharp.Certification）
-      * [x] 初始化
-      * [x] 开始认证
-      * [x] 认证查询
+  * [x] 初始化
+  * [x] 开始认证
+  * [x] 认证查询
+* [x] 芝麻IVS（ZmopSharp.Ivs）
+  * [x] 欺诈评分
+  * [x] 信息验证
+  * [x] 关注清单
 * [x] 芝麻评分（ZmopSharp.Score）
-      * [x] 信用评分
-      * [x] 信用评分普惠版
+  * [x] 信用评分
+  * [x] 信用评分普惠版
 * [ ] 数据反馈（ZmopSharp.Feedback）
-      * [ ] 批量反馈
-      * [ ] 反馈模板
-* [ ] 芝麻IVS（ZmopSharp.Ivs）
-      * [ ] 欺诈评分
-      * [ ] 信息验证
-      * [ ] 关注清单
+  * [ ] 批量反馈
+  * [ ] 反馈模板
 * [ ] 行业关注（ZmopSharp.Watchlist）
-      * [ ] 关注名单
-      * [ ] 关注名单普惠版
+  * [ ] 关注名单
+  * [ ] 关注名单普惠版
 
 ## 协议
 
