@@ -5,7 +5,7 @@ using ZmopSharp.Core;
 using ZmopSharp.Exceptions;
 using ScoreConstants = ZmopSharp.Constants.Score;
 
-namespace ZmopSharp.Score
+namespace ZmopSharp
 {
     public class Score
     {
